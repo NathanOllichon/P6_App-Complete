@@ -1,0 +1,54 @@
+        <app-menu-connected></app-menu-connected>
+
+    <button mat-icon-button (click)="goBack()">
+        <mat-icon class="goBack">keyboard_backspace</mat-icon>
+    </button>
+
+    <div class="container">
+
+        <h1 mat-dialog-title class="d-flex justify-content-center">Créer un nouvel article</h1>
+
+        <div mat-dialog-content class="form">
+
+            <form class="row g-3 d-flex justify-content-center" #form="ngForm" (ngSubmit)="submit()">
+                
+
+
+                <!-- TODO WIP -->
+                <div class="col-lg-8 col-lg-offset-8">
+                    <select class="form-select themeSelect" name="theme" [(ngModel)]="formData.themeID"
+                    placeholder="Sélectionner un thème" required> <!-- (ngModelChange)="onManagerChange($event)" -->
+                      <option *ngFor="let theme of themes" [ngValue]="theme.titre">{{ theme.titre }}</option>
+                    </select>
+                    <!-- [formControl]="manager"  -->
+
+                    <!-- <mat-error *ngIf="manager.invalid">{{getManagerErrorMessage()}}</mat-error> -->
+                  </div>
+
+
+
+
+
+
+                <div class="col-lg-8 col-lg-offset-8">
+                    <input type="text" class="form-control" name="title" [(ngModel)]="formData.titre" 
+                    placeholder="Titre de l'article" required> 
+                    <!-- [formControl]="emailControl" -->
+                    
+                    <!-- <mat-error *ngIf="onError">{{getEmailErrorMessage()}}</mat-error> -->
+                    <!-- <mat-error *ngIf="emailControl.invalid">{{getEmailErrorMessage()}}</mat-error> -->
+                </div>
+
+                <div class="form-group col-lg-8 col-lg-offset-8">
+                    <textarea class="form-control contenu" name="contenu" [(ngModel)]="formData.contenu"
+                    placeholder="Contenu de l'article" maxlength="2000"></textarea>
+                </div>
+                
+                <div class="button creerArticle d-flex justify-content-center submitButton">
+                    <button mat-flat-button color="primary" style="width: 10vw; max-width: 10vw;">Créer</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+

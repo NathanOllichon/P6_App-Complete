@@ -1,0 +1,50 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-top: 5vh;
+}
+
+.grid-container>div {
+    background-color: #e5e5e5a3;
+    width: 44vw;
+    margin: 0vh 3vw 3vh 3vw;
+    padding: 1vh 1vw 0vh 1vw;
+    height: 20vh;
+    border-radius: 1vh;
+
+    .titre {
+        font-weight: 700;
+        padding-bottom: 1vh;
+    }
+
+    div {
+        width: 42vw;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        padding-bottom: 1vh;
+
+    }
+
+    .contenu {
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+        height: 8vh
+    }
+
+    .subscribeThemeDiv {
+        display: flex;
+        justify-content: center;
+        margin-top: 0.5vh;
+        margin-bottom: 0.5vh;
+    }
+
+    .subscribeThemeBtn {
+        width: 13vw;
+        max-width: 13vw;
+    }
+
+
+}

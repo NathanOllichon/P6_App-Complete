@@ -1,0 +1,33 @@
+mat-icon{
+    width: auto;
+    height: auto;
+}
+
+.container {
+    background-color: white;
+    border-bottom: 0.1vh solid black;
+    display: flex;
+    justify-content: space-between;
+    min-width: 100vw;
+    padding: 0vh 0vw 0vh 0vw; 
+    font-size: 10vw;
+}
+ 
+.accountIcon{
+    font-size: 4vw;
+    margin-bottom: -1.2vh;
+    margin-right: 1vw;
+    cursor: pointer;
+}
+
+a{
+    margin-bottom: 2vh;
+    font-size: 3vw;
+    font-weight: 400;
+}
+
+.logo{
+    width: 7.5vw;
+    margin-top: 1vh;
+}
+

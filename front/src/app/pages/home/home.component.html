@@ -1,5 +1,9 @@
 <div class="center">
-  <img src="/assets/logo_p6.png" alt="logo" />
-  <h1>Welcome to MDD</h1>
-  <button mat-raised-button color="primary" (click)="start()">Commencer</button>
+  <img class="logo" src="/assets/logo_p6.png" alt="logo" />
+  <div class="align-button">
+    <!-- flex-direction: row; -->
+    <button mat-stroked-button (click)="routeToLogIn()" style="border-color: black;">Se connecter</button>
+    <button  mat-stroked-button style="border-color: black;" (click)="routeToSuscribe()">S'inscrire</button>
+  </div>
+
 </div>

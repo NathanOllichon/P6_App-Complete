@@ -1,0 +1,34 @@
+<app-menu-connected></app-menu-connected>
+
+<div class="page">
+
+    <button mat-icon-button (click)="goBack()">
+        <mat-icon class="goBack">keyboard_backspace</mat-icon>
+    </button>
+
+    <label class="titre">{{articleDatas.titre}}</label>
+    <div>
+        <label class="date">{{articleDatas.date | date: 'dd/MM/yyyy'}}</label>
+        <label class="auteur">{{articleDatas.user}}</label>
+        <label class="theme">{{articleDatas.theme}}</label>
+    </div>
+    <span class="contenu">{{articleDatas.contenu}}</span>
+
+    <hr>
+
+    <label class="labelCommentaires">Commentaires</label>
+
+    <div class="commentaireList" *ngFor="let commentaire of commentairesList">
+        <label class="auteurCommentaire">{{commentaire.auteur}}</label>
+        <label class="commentaire">{{commentaire.contenu}}</label>
+    </div>
+
+    <!-- TODO textera comment -->
+    <div class="newComment">
+        <textarea placeholder="Ecrivez ici votre commentaire" class="newCommentText" maxlength="500"></textarea>
+        <button mat-icon-button (click)="sendComment()">
+            <mat-icon class="createComment">send</mat-icon>
+        </button>
+    </div>
+
+</div>

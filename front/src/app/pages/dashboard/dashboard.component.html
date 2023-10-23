@@ -1,0 +1,37 @@
+<app-menu-connected></app-menu-connected>
+
+<div fxShow="true" fxHide.lt-md="true" class="container">
+    <div>
+        <button mat-flat-button color="primary" style="min-width: 120px; width: 13vw" (click)="goToCreateArticle();">
+            Créer un article</button>
+    </div>
+
+
+
+    <div>
+        <div class="sort">
+            <button>Trier par 
+                <mat-icon>arrow_downward</mat-icon>
+            </button>
+            
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+<div class="grid-container">
+    <ng-container *ngFor="let article of articlesDatas">
+        <div class="article" (click)="goToArticlesDetails(article.id);">
+            <label class="titre">{{article.titre}}</label>
+            <div>
+                <label class="date">{{article.date | date: 'dd/MM/yyyy'}}</label> 
+                <label class="auteur">{{article.user}}</label>
+            </div>
+            <span class="contenu">{{article.contenu}}</span>
+        </div>
+    </ng-container>
+</div>

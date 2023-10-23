@@ -1,0 +1,49 @@
+<app-menu-connected></app-menu-connected>
+
+<h1 class="center">Profil utilisateur</h1>
+
+<div class="container">
+
+    <div mat-dialog-content class="form">
+        <form class="row g-3 d-flex justify-content-center" #form="ngForm" (ngSubmit)="submit()">
+            <div class="col-lg-8 col-lg-offset-8">
+                <input type="text" class="form-control" name="email" [(ngModel)]="formData.email" placeholder="Email"
+                    required> <!-- [formControl]="emailControl" -->
+                <!-- <mat-error *ngIf="onError">{{getEmailErrorMessage()}}</mat-error> -->
+                <!-- <mat-error *ngIf="emailControl.invalid">{{getEmailErrorMessage()}}</mat-error> -->
+
+            </div>
+            <div class="form-group col-lg-8 col-lg-offset-8">
+                <input type="password" class="form-control" name="password" [(ngModel)]="formData.username"
+                    placeholder="Mot de passe">
+            </div>
+            <div class="button login d-flex justify-content-center submitButton">
+                <button mat-flat-button color="primary" style="width: 18vw; min-width: 25vw;">
+                    Sauvegarder</button>
+            </div>
+            <button mat-flat-button color="warn" class="logout" style="width: 18vw; min-width: 25vw;">
+                Se deconnecter</button>
+        </form>
+    </div>
+</div>
+
+<hr>
+
+<h1 class="center">Abonnements</h1>
+
+<div class="grid-container">
+    <ng-container *ngFor="let theme of themesDatasSubscribed">
+        <div class="theme">
+            <label class="titre">{{theme.titre}}</label>
+            <span class="contenu">{{theme.description}}</span>
+
+            <div class="subscribeThemeDiv">
+
+                <button mat-flat-button class="subscribeThemeBtn" color="primary" (click)="unSubscribeTheme(theme.id);">
+                    Se désabonner
+                </button>
+            </div>
+
+        </div>
+    </ng-container>
+</div>

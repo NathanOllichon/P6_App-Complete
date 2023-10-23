@@ -1,0 +1,35 @@
+.custom-toolbar {
+    width: 100vw;
+    height: 4em;
+    background-color: white;
+    border-bottom: 0.1vh solid black;
+
+    .logo {
+        max-width: 8em;
+    }
+
+}
+
+@media (width < 40em) {
+    //or 700px ? size of central image. verify rules project
+
+    .custom-toolbar {
+        background-color: white;
+        border-bottom: 0.1vh;
+        width: 40vh;
+        height: fit-content;
+        margin-right: 0px;
+        margin-bottom: -5vh;
+        // border-bottom : 0.1vh solid black;
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            max-width: 40vh;
+            margin-right: auto;
+        }
+    }
+
+}

@@ -1,0 +1,81 @@
+
+.page{
+    margin: 3vh 15vw 0vh 15vw;
+    font-size: 2vh;
+    font-weight: 400;
+
+
+    .titre{
+        font-size: 3vh;
+        font-weight: 900;
+        margin-bottom: 3vh;
+    }
+
+    > div > label{
+        margin-right: 2vw;    
+        margin-bottom: 3vh;
+    }
+
+    hr{
+        border-top: 0.2vh solid #000000;
+    }
+
+    .labelCommentaires{
+        margin-bottom: 3vh;
+    }
+
+    .auteurCommentaire{
+        padding-left: 5vw;
+        width: 10vw;
+    }
+
+    .commentaireList{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .commentaire{
+        background-color: rgb(224, 224, 224);
+        //border: 1px solid black;
+        border-radius: 1.5vh;
+        width: 43vw;
+        height: 20vh;
+        padding: 1vh 1vw 1vh 1vw;
+    }
+
+    .newCommentText{
+        border-radius: 1.5vh;
+        width: 55vw;
+        height: 20vh;
+        margin-right: 5vw;
+    }
+
+    .createComment{
+        margin-top: -20vh;
+        color: blueviolet;
+        padding-top: 4vh;
+        width: 10vw;
+        height: 10vh;
+        font-size: 7vw;
+        display: inline-block;
+        padding-right: 0vw;
+        margin-right: 0vw;
+    }
+
+    .newCommentText{
+        padding: 1vh 1vw 1vh 1vw;
+    }
+
+
+}
+
+.goBack {
+    width: fit-content;
+    height: fit-content;
+    font-size: 8vw;
+    display: inline-block;
+    transform: translate(-150%);
+    padding-right: 0vw;
+    margin-right: 0vw;
+}
+

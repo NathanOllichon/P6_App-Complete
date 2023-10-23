@@ -4,4 +4,112 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: -15vh;
 }
+
+.align-button {
+  flex-direction: row;
+}
+
+.logo{
+  width: 50vw;
+}
+
+button{
+  margin-left: 1vw;
+  margin-right: 1vw;
+  width: fit-content;
+  padding: 0.2vh, 0.2vw, 0.2vh, 0.2vw;
+  min-width: 20vw;
+  font-size: 1em;
+}
+
+@media (width < 40em) { //or 700px ? size of central image. verify rules project
+
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  h1{
+    margin-bottom: 5vh;
+    margin-top: -3vh;
+  }
+
+  button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 25vw;
+    min-width: fit-content;
+    font-size: 0.8em;
+    margin-bottom: 1vh;
+    justify-content: flex-start;
+
+  }
+
+}
+
+
+/* in media max width, try a amburger menu.
+
+// Sidenav menu
+.sidenav {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: -250px;
+  background-color: #e8e8e8;
+  padding-top: 60px;
+  transition: left 0.5s ease;
+}
+
+// Sidenav menu links 
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #111;
+}
+
+.sidenav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+// Active class 
+.sidenav.active {
+  left: 0;
+}
+
+// Close btn
+.sidenav .close {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+}
+
+// Icône burger
+.burger-icon span {
+  display: block;
+  width: 35px;
+  height: 5px;
+  background-color: black;
+  margin: 6px 0;
+}
+
+*/

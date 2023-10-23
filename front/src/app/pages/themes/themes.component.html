@@ -1,0 +1,18 @@
+<app-menu-connected></app-menu-connected>
+
+<div class="grid-container">
+    <ng-container *ngFor="let theme of themesDatas">
+        <div class="theme">
+            <label class="titre">{{theme.titre}}</label>
+            <span class="contenu">{{theme.description}}</span>
+
+            <div class="subscribeThemeDiv">
+
+                <button mat-flat-button class="subscribeThemeBtn" color="primary" (click)="subscribeTheme(theme.id);">
+                    S'abonner
+                </button>
+            </div>
+
+        </div>
+    </ng-container>
+</div>
