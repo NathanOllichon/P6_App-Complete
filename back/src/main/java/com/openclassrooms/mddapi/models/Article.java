@@ -35,11 +35,11 @@ public class Article {
     private String contenu;
 
     @CreatedDate
-    @Column(name = "date", updatable = false)
-    private Instant date;
+    @Column(name = "created_at", updatable = false)
+    private Instant created_at;
 
     @ManyToOne
-    @JoinColumn(name = "id_theme", updatable = false)
+    @JoinColumn(name = "fk_id_theme", updatable = false)
     private Theme theme;
     
     @ManyToOne

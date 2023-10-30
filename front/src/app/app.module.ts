@@ -13,7 +13,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import {MatSidenavModule} from '@angular/material/sidenav';
+
 
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +24,8 @@ import { ArticleDetailsComponent } from './pages/article-details/article-details
 import { CreateArticleComponent } from './pages/create-article/create-article.component';
 import { AccountComponent } from './pages/account/account.component';
 import { ThemesComponent } from './pages/themes/themes.component';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+
 
 const materialModules = [
   MatButtonModule,
@@ -29,11 +33,23 @@ const materialModules = [
   MatFormFieldModule,
   MatIconModule,
   MatToolbarModule,
-  MatInputModule
+  MatInputModule,
+  MatSidenavModule
 ]
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LogInComponent, RegisterComponent, MenuDisconectedComponent, MenuConnectedComponent, DashboardComponent, ArticleDetailsComponent, CreateArticleComponent, AccountComponent, ThemesComponent],
+  declarations: [
+    AppComponent, 
+    HomeComponent, 
+    LogInComponent, 
+    RegisterComponent, 
+    MenuDisconectedComponent, 
+    MenuConnectedComponent, 
+    DashboardComponent, 
+    ArticleDetailsComponent, 
+    CreateArticleComponent, 
+    AccountComponent, 
+    ThemesComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -45,7 +61,9 @@ const materialModules = [
     HttpClientModule,
     ...materialModules
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent, LogInComponent],
 })
 export class AppModule {}

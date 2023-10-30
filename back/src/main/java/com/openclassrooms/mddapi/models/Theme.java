@@ -4,6 +4,7 @@ import lombok.*;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -22,22 +23,24 @@ public class Theme {
     @Id
     private long id;
 
-    @Column(name = "title")
+    @Column(name = "titre")
     private String title;
 
     @Column(name = "description")
     private String description;
 
     @OneToMany(
-            mappedBy = "theme",
+            mappedBy = "theme", //TODO for mapped spring need that !
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    private List<Subscription> userList;
+    private List<Subscription> subscriptionList;
 
+    
     @OneToMany(
-            mappedBy = "theme",
+            mappedBy = "id", //TODO for mapped spring need that !
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @EmbeddedId
     private List<Article> articleEntities;
 }

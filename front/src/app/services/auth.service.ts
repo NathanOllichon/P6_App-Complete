@@ -14,9 +14,9 @@ export class AuthService {
   private pathService = 'http://localhost:3001/api/auth';
   private headers = new HttpHeaders({
     'Access-Control-Allow-Origin' : '*',
-    'Access-Control-Allow-Headers' : 'Content-Type',
-    'Content-Type': 'application/json',
-    Accept: 'application/json'
+    // 'Access-Control-Allow-Headers' : 'Content-Type',
+    // 'Content-Type': 'application/json',
+    // Accept: 'application/json'
   });
   constructor(private http: HttpClient) { }
 

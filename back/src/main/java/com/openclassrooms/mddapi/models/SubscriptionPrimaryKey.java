@@ -17,7 +17,6 @@ public class SubscriptionPrimaryKey{
     @Column(name = "user_id")
     Long user_id;
 
-
     @Column(name = "theme_id")
     Long theme_id;
 }

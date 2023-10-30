@@ -1,12 +1,30 @@
-
-      <!-- TODO when active color = primary-->
+<!-- TODO when active color = primary-->
 <div fxShow="true" fxHide.lt-md="true" class="container border-bottom border-dark">
   <div>
     <img class="logo" src="/assets/logo_p6.png" alt="logo" />
   </div>
   <div>
-      <a mat-button (click)="navigateToArticles()">Articles</a>
-      <a mat-button (click)="navigateToThemes()">Themes</a>
-      <mat-icon class="accountIcon" (click)="navigateToAccount()">person_outline</mat-icon>
+    <a mat-button (click)="navigateToArticles()">Articles</a>
+    <a mat-button (click)="navigateToThemes()">Themes</a>
+    <mat-icon class="accountIcon" (click)="navigateToAccount()">person_outline</mat-icon>
   </div>
+</div>
+
+
+
+<div class="burgeurMenu">
+
+  <div id="mySidenav" class="sidenav">
+    <a id="closeBtn" (click)="closeNav()" class="close" style="cursor: pointer;">&times;</a>
+    <ul>
+      <li><a mat-button (click)="navigateToArticles()">Articles</a></li>
+      <li><a mat-button (click)="navigateToThemes()">Themes</a></li>
+      <li><mat-icon class="accountIcon" (click)="navigateToAccount()">person_outline</mat-icon></li>
+    </ul>
+  </div>
+
+  <a id="openBtn" (click)="openNav()" style="margin-left: 1vw; cursor: pointer;">
+      <mat-icon class="burger-icon">list</mat-icon>
+  </a>
+
 </div>

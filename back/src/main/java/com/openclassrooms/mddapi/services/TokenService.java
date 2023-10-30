@@ -30,7 +30,7 @@ public class TokenService {
 	public String generateToken(String mail) {
 		Instant now = Instant.now();
 		JwtClaimsSet claims = JwtClaimsSet.builder().issuer("self").issuedAt(now)
-				.expiresAt(now.plus(1, ChronoUnit.HOURS)).subject(mail).build();
+				.expiresAt(now.plus(12, ChronoUnit.HOURS)).subject(mail).build();
 		return this.encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
 	}
 

@@ -1,40 +1,39 @@
-
-.page{
+.page {
     margin: 3vh 15vw 0vh 15vw;
     font-size: 2vh;
     font-weight: 400;
 
 
-    .titre{
+    .titre {
         font-size: 3vh;
         font-weight: 900;
         margin-bottom: 3vh;
     }
 
-    > div > label{
-        margin-right: 2vw;    
+    >div>label {
+        margin-right: 2vw;
         margin-bottom: 3vh;
     }
 
-    hr{
+    hr {
         border-top: 0.2vh solid #000000;
     }
 
-    .labelCommentaires{
+    .labelCommentaires {
         margin-bottom: 3vh;
     }
 
-    .auteurCommentaire{
+    .auteurCommentaire {
         padding-left: 5vw;
         width: 10vw;
     }
 
-    .commentaireList{
+    .commentaireList {
         display: flex;
         flex-direction: row;
     }
 
-    .commentaire{
+    .commentaire {
         background-color: rgb(224, 224, 224);
         //border: 1px solid black;
         border-radius: 1.5vh;
@@ -43,14 +42,16 @@
         padding: 1vh 1vw 1vh 1vw;
     }
 
-    .newCommentText{
+    .newCommentText {
         border-radius: 1.5vh;
         width: 55vw;
         height: 20vh;
         margin-right: 5vw;
+        padding: 1vh 1vw 1vh 1vw;
+
     }
 
-    .createComment{
+    .createComment {
         margin-top: -20vh;
         color: blueviolet;
         padding-top: 4vh;
@@ -61,11 +62,6 @@
         padding-right: 0vw;
         margin-right: 0vw;
     }
-
-    .newCommentText{
-        padding: 1vh 1vw 1vh 1vw;
-    }
-
 
 }
 
@@ -79,3 +75,64 @@
     margin-right: 0vw;
 }
 
+@media (width < 60em){
+
+    .auteurCommentaire {
+        margin-left: -3vw;
+        padding-right: 8vw;
+        width: 10vw;
+    }
+
+    .page {
+        .commentaire {
+            background-color: rgb(224, 224, 224);
+            border-radius: 1.5vh;
+            width: 55vw;
+            height: 20vh;
+            padding: 1vh 1vw 1vh 1vw;
+        }
+    }
+
+}
+
+
+@media (width <= 40em) {
+    
+    .auteurCommentaire {
+        margin-left: -5vw;
+        width: 10vw;
+    }
+
+    .page {
+        margin: 3vh 1vw 0vh 1vw;
+        font-size: 2vh;
+        font-weight: 400;
+
+        .commentaire {
+            background-color: rgb(224, 224, 224);
+            border-radius: 1.5vh;
+            width: 70vw;
+            height: 20vh;
+            padding: 1vh 1vw 1vh 1vw;
+            margin-left: 1vw;
+        }
+
+        .createComment {
+            margin-top: -20vh;
+            color: blueviolet;
+            padding-top: 4vh;
+            width: 10vw;
+            height: 10vh;
+            font-size: 7vw;
+            display: inline-block;
+            padding-right: 0vw;
+            margin-left: -2vw;
+        }
+
+        .newCommentText{
+            width: 80vw;
+        }
+
+    }
+
+}

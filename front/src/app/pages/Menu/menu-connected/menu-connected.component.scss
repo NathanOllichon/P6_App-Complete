@@ -1,4 +1,4 @@
-mat-icon{
+mat-icon {
     width: auto;
     height: auto;
 }
@@ -9,25 +9,107 @@ mat-icon{
     display: flex;
     justify-content: space-between;
     min-width: 100vw;
-    padding: 0vh 0vw 0vh 0vw; 
+    padding: 0vh 0vw 0vh 0vw;
     font-size: 10vw;
 }
- 
-.accountIcon{
+
+.accountIcon {
     font-size: 4vw;
     margin-bottom: -1.2vh;
     margin-right: 1vw;
     cursor: pointer;
 }
 
-a{
+a {
     margin-bottom: 2vh;
     font-size: 3vw;
     font-weight: 400;
 }
 
-.logo{
+.logo {
     width: 7.5vw;
     margin-top: 1vh;
 }
 
+.burgeurMenu {
+    display: none;
+}
+
+@media (width < 40em) {
+
+    .burgeurMenu {
+        display: block;
+    }
+
+    .container {
+        display: none;
+    }
+
+    /* Sidenav menu */
+    .sidenav {
+        height: 100%;
+        width: 38vw;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: -38vw;
+        background-color: #f5f5f5d1;
+        padding-top: 20vh;
+        transition: right;
+    }
+
+    .sidenav ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Sidenav menu links */
+    .sidenav a {
+        padding: -1vh 1vw 1vh 1vw;
+        text-decoration: none;
+        font-size: 3vh;
+        color: #000000;
+        display: block;
+    }
+
+    .sidenav a:hover {
+        color: #111;
+    }
+
+    /* Active class */
+    .sidenav.active {
+        left: 60%;
+        padding-top: 8vh;
+    }
+
+    /* Close btn */
+    .sidenav .close {
+        margin: 1vh 0vw 0vh 1vw;
+        position: absolute;
+        top: 0;
+        font-size: 8vh;
+    }
+
+    .burger-icon {
+        display: block;
+        width: 10vw;
+        color: #111;
+        font-size: 5vh;
+        margin-top: 0.5vh;
+        margin-left: 1vw;
+        margin-right: 1vw;
+        float: right;
+        clear: right;
+    }
+
+    li>mat-icon {
+        font-size: 8vh;
+        margin-top: 50vh;
+        width: 100%;
+        margin-left: 13vw;
+        align-items: center;
+
+    }
+
+}

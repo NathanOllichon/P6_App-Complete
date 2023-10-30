@@ -1,6 +1,5 @@
 package com.openclassrooms.mddapi.controllers;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,19 +35,17 @@ public class AuthController {
 		this.tokenService = tokenService;
 	}
 
-	@Operation(summary = "Create a new User, email unique needed", 
-			description = "Route for create an user. Email need to be unique ! The response is the security token.")
+	@Operation(summary = "Create a new User, email unique needed", description = "Route for create an user. Email need to be unique ! The response is the security token.")
 	@PostMapping("/auth/register")
 	@ResponseBody
-	public TokenDTO register(@RequestBody UserJsonDTO userJsonDTO) {		
+	public TokenDTO register(@RequestBody UserJsonDTO userJsonDTO) {
 		userService.registerUser(userJsonDTO);
 		String token = tokenService.generateToken(userJsonDTO.getEmail());
 		TokenDTO tokenDTO = new TokenDTO(token);
 		return tokenDTO;
 	}
 
-	@Operation(summary = "Log in route if your user are registered and your credentials are good", 
-			description = "Route for log in user. Credentials mail and password needed. The response is the security token.")
+	@Operation(summary = "Log in route if your user are registered and your credentials are good", description = "Route for log in user. Credentials mail and password needed. The response is the security token.")
 	@PostMapping("/auth/login")
 	@ResponseBody
 	public TokenDTO login(@RequestBody CredentialsJsonDTO credentialsJsonDTO) {
@@ -58,8 +55,7 @@ public class AuthController {
 		return tokenDTO;
 	}
 
-	@Operation(summary = "Route for validate your JWT token", 
-			description = "Route for validate your token. The response is a DTO with your user informations.")
+	@Operation(summary = "Route for validate your JWT token", description = "Route for validate your token. The response is a DTO with your user informations.")
 	@GetMapping("/auth/me")
 	@ResponseBody
 	public UserDTO getMe(@RequestHeader("Authorization") String token) {

@@ -2,6 +2,7 @@ package com.openclassrooms.mddapi.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
@@ -29,32 +30,30 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		return http.csrf(
-				csrf -> csrf.disable())
-				.authorizeRequests(auth -> auth.requestMatchers("/api/auth/register", "/api/auth/login", "/swagger-ui*/**", "/documentation.html", "/v3/**").permitAll()
-				.anyRequest().authenticated()
-				)
+		return http.csrf(csrf -> csrf.disable())
+				.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/register", "/auth/me", 
+						"/auth/login", "/swagger-ui*/**", "/documentation.html", "/v3/**")
+						.permitAll().anyRequest().authenticated())
 				.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+				.cors(Customizer.withDefaults())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.httpBasic(withDefaults()).build();
 	}
-	
-	
 
 	public SecurityConfig(RsaKeyProperties rsaKeys) {
 		this.rsaKeys = rsaKeys;
 	}
-	
+
 	@Bean
 	JwtDecoder jwtDecoder() {
-	    return NimbusJwtDecoder.withPublicKey(rsaKeys.publicKey()).build();
+		return NimbusJwtDecoder.withPublicKey(rsaKeys.publicKey()).build();
 	}
 
 	@Bean
 	JwtEncoder jwtEncoder() {
-	    JWK jwk = new RSAKey.Builder(rsaKeys.publicKey()).privateKey(rsaKeys.privateKey()).build();
-	    JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
-	    return new NimbusJwtEncoder(jwks);
+		JWK jwk = new RSAKey.Builder(rsaKeys.publicKey()).privateKey(rsaKeys.privateKey()).build();
+		JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
+		return new NimbusJwtEncoder(jwks);
 	}
-	
+
 }

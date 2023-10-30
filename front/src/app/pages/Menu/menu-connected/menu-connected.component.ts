@@ -6,25 +6,37 @@ import { Router } from '@angular/router';
   templateUrl: './menu-connected.component.html',
   styleUrls: ['./menu-connected.component.scss']
 })
-export class MenuConnectedComponent implements OnInit {
+export class MenuConnectedComponent{
 
   constructor(private router: Router) { }
 
-  ngOnInit(): void {
-  }
-
-  navigateToAccount(){
+  navigateToAccount() {
     this.router.navigate(['account']);
   }
 
-  
-  navigateToArticles(){
+
+  navigateToArticles() {
     this.router.navigate(['articles']);
   }
 
-  navigateToThemes(){
+  navigateToThemes() {
     this.router.navigate(['themes']);
   }
-  
+
+  openNav() {
+    const sidenav = document.getElementById("mySidenav");
+    if(sidenav){
+      sidenav.classList.add("active");
+    }
+  }
+
+  /* Set the width of the side navigation to 0 */
+  closeNav() {
+    const sidenav = document.getElementById("mySidenav");
+
+    if(sidenav){
+      sidenav.classList.remove("active");
+    }
+  }
 
 }

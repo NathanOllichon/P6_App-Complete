@@ -82,7 +82,6 @@ export class RegisterComponent implements OnInit {
       }
     });
 
-
   }
   // alert('register OK');
   //TODO
