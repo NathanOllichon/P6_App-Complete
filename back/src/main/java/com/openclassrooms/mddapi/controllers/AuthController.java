@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.mddapi.dto.TokenDTO;
+import com.openclassrooms.mddapi.dto.UpdateUserJsonDTO;
 import com.openclassrooms.mddapi.dto.UserJsonDTO;
 import com.openclassrooms.mddapi.mappers.UserMapper;
 import com.openclassrooms.mddapi.dto.UserDTO;
@@ -65,4 +67,19 @@ public class AuthController {
 		return userDTO;
 	}
 
+	@Operation(summary = "Route for update email and/or username for an user, ", description = "Route for validate your token. The response is a DTO with your user informations.")
+	@PostMapping("/auth/updateUser")
+	@ResponseBody
+	public ResponseEntity<UserDTO> updateUser(@RequestHeader("Authorization") String token, @RequestBody UpdateUserJsonDTO updateUserJsonDTO) {
+
+		User actualUser = tokenService.validateJwtToken(token);
+		User userUpdated = userService.updateUser(actualUser, updateUserJsonDTO);
+		
+		UserDTO userUpdatedDTO = UserMapper.MAPPER.mapToUserDto(userUpdated);
+		
+        return ResponseEntity.ok(userUpdatedDTO);
+	}
+	
 }
+
+

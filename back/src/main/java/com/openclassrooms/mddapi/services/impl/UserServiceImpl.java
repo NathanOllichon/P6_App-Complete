@@ -3,6 +3,7 @@ package com.openclassrooms.mddapi.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.openclassrooms.mddapi.dto.UpdateUserJsonDTO;
 import com.openclassrooms.mddapi.dto.UserJsonDTO;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
@@ -27,7 +28,6 @@ public class UserServiceImpl implements UserService {
     	userRepository.save(userCreated);
     }
     
-    //TODO identifier WIP test that !
     @Override
 	public User isLoginValid(String identifier, String password) {
     	User user;
@@ -45,4 +45,18 @@ public class UserServiceImpl implements UserService {
     	return null;
 	}
     
+    @Override
+    public User updateUser(User userToUpdate, UpdateUserJsonDTO updateUserJsonDTO) {
+    	User userAlreadyInDB = userRepository.findByEmail(updateUserJsonDTO.getEmail());
+    	
+    	if( userAlreadyInDB == null || updateUserJsonDTO.getEmail().equals(userToUpdate.getEmail()) ){
+    		userToUpdate.setEmail(updateUserJsonDTO.getEmail());
+    		userToUpdate.setUsername(updateUserJsonDTO.getUsername());
+    		userRepository.save(userToUpdate);
+    	}
+		
+		return userToUpdate;
+    }
+    
 }
+

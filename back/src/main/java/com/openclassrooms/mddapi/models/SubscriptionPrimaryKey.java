@@ -1,7 +1,11 @@
 package com.openclassrooms.mddapi.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.io.Serializable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -12,11 +16,18 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 @Getter
 @Setter
-public class SubscriptionPrimaryKey{
+@AllArgsConstructor
+@NoArgsConstructor
+public class SubscriptionPrimaryKey implements Serializable{
 	
-    @Column(name = "user_id")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Column(name = "FK_id_user")
     Long user_id;
 
-    @Column(name = "theme_id")
+    @Column(name = "FK_id_theme")
     Long theme_id;
 }

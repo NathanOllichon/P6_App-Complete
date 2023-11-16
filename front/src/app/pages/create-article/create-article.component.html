@@ -10,15 +10,15 @@
 
         <div mat-dialog-content class="form">
 
-            <form class="row g-3 d-flex justify-content-center" #form="ngForm" (ngSubmit)="submit()">
+            <form class="row g-3 d-flex justify-content-center" #form="ngForm">
                 
 
 
                 <!-- TODO WIP -->
                 <div class="col-lg-8 col-lg-offset-8">
-                    <select class="form-select themeSelect" name="theme" [(ngModel)]="formData.themeID"
+                    <select class="form-select themeSelect" name="theme" [(ngModel)]="formData.idTheme"
                     placeholder="Sélectionner un thème" required> <!-- (ngModelChange)="onManagerChange($event)" -->
-                      <option *ngFor="let theme of themes" [ngValue]="theme.titre">{{ theme.titre }}</option>
+                      <option *ngFor="let theme of themes" [ngValue]="theme.id">{{ theme.titre }}</option>
                     </select>
                     <!-- [formControl]="manager"  -->
 
@@ -31,7 +31,7 @@
 
 
                 <div class="col-lg-8 col-lg-offset-8">
-                    <input type="text" class="form-control" name="title" [(ngModel)]="formData.titre" 
+                    <input type="text" class="form-control" name="title" [(ngModel)]="formData.title" 
                     placeholder="Titre de l'article" required> 
                     <!-- [formControl]="emailControl" -->
                     
@@ -45,7 +45,7 @@
                 </div>
                 
                 <div class="button creerArticle d-flex justify-content-center submitButton">
-                    <button mat-flat-button color="primary" style="width: 10vw; max-width: 10vw;">Créer</button>
+                    <button mat-flat-button color="primary" style="width: 10vw; max-width: 10vw;" (click)="createArticle(formData)">Créer</button>
                 </div>
 
             </form>

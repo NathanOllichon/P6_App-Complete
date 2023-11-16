@@ -7,7 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    //TODO redirect if you're connected !
+  }
 
   ngOnInit(): void {}
 
@@ -15,7 +17,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['logIn']);
   }
 
-  routeToSuscribe() {
+  routeToSubscribe() {
     this.router.navigate(['register']);
   }
 }

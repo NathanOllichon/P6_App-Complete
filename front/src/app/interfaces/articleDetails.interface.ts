@@ -1,9 +1,11 @@
+import { CommentArticle } from "./commentArticle.interface";
 
 export interface ArticleDetails {
     titre: string,
-    date: Date,
-    user: string,
+    created_at: Date,
+    auteur_name: string,
     contenu: string,
     id: number,
-    theme: string
+    theme_titre: string,
+    commentaires: CommentArticle[]
 }

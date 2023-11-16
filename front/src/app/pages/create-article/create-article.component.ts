@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemeListDTO } from 'src/app/interfaces/themeListDTO.interface';
 import { ArticleToCreate } from 'src/app/interfaces/articleToCreate.interface';
+import { ArticlesService } from 'src/app/services/articles.service';
+import { ThemesService } from 'src/app/services/themes.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-article',
@@ -8,40 +12,42 @@ import { ArticleToCreate } from 'src/app/interfaces/articleToCreate.interface';
 })
 export class CreateArticleComponent implements OnInit {
 
-  //TODO no any, model datas, need to type all !
-  formData: ArticleToCreate ={
-    themeID: '',
-    titre: '',
+  formData: ArticleToCreate = {
+    idTheme: 0,
+    title: '',
     contenu: ''
   };
 
-  themes: any[] = 
-  [
-    {
-      "titre": "theme 1",
-      "id":1
-    },
-    {
-      "titre": "theme 2",
-      "id": 2
-    },
-    {
-      "titre": "theme 3",
-      "id": 3
-    }
-  ]
+  themes: ThemeListDTO[] = [];
 
-  constructor() { }
+  constructor(
+    private articlesService: ArticlesService,
+    private themesService: ThemesService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.themesService.getThemesList().subscribe(
+      (response: ThemeListDTO[]) => {
+        this.themes = response; 
+      },
+      error => console.log(error)
+    )
   }
 
-  goBack(){
+  goBack() {
     window.history.back();
   }
 
-  submit(){
+  createArticle(formData: ArticleToCreate) {
 
+    this.articlesService.createArticle(this.formData).subscribe(
+      (response: String) => {},
+      error => console.log(error)
+    );
+
+    this.router.navigate(['dashboard'])
   }
 
 }
+

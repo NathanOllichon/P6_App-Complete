@@ -8,19 +8,21 @@ import { ArticleDetailsComponent } from './pages/article-details/article-details
 import { CreateArticleComponent } from './pages/create-article/create-article.component';
 import { AccountComponent } from './pages/account/account.component';
 import { ThemesComponent } from './pages/themes/themes.component';
+import { UnauthGuard } from 'src/helpers/unauth.guard';
+import { AuthGuard } from 'src/helpers/auth.guard';
 
 // consider a guard combined with canLoad / canActivate route option
 // to manage unauthenticated user to access private routes
 const routes: Routes = [
-{ path: '', component: HomeComponent },
-{ path: 'logIn', component: LogInComponent },
-{ path: 'register', component: RegisterComponent },
-{ path: 'articles', component: DashboardComponent },
-{ path: 'themes', component: ThemesComponent },
-{ path: 'articleDetails', component: ArticleDetailsComponent },
-{ path: 'createArticle', component: CreateArticleComponent },
-{ path: 'account', component: AccountComponent },
-{ path: '**', redirectTo: 'articles' //TODO need canActivate if disconnected !
+{ path: '', component: HomeComponent, canActivate: [UnauthGuard]},
+{ path: 'logIn', component: LogInComponent, canActivate: [UnauthGuard]},
+{ path: 'register', component: RegisterComponent, canActivate: [UnauthGuard]},
+{ path: 'articles', component: DashboardComponent, canActivate: [AuthGuard]},
+{ path: 'themes', component: ThemesComponent, canActivate: [AuthGuard]},
+{ path: 'articleDetails', component: ArticleDetailsComponent, canActivate: [AuthGuard]},
+{ path: 'createArticle', component: CreateArticleComponent, canActivate: [AuthGuard]},
+{ path: 'account', component: AccountComponent, canActivate: [AuthGuard]},
+{ path: '**', redirectTo: '' //TODO need canActivate if disconnected !
 }
 
 ];

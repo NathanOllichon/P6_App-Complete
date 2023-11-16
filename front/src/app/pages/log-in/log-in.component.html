@@ -13,7 +13,7 @@
         <h1 mat-dialog-title>Se connecter</h1>
 
         <div mat-dialog-content class="form">
-            <form class="row g-3 d-flex justify-content-center" #form="ngForm" (ngSubmit)="submit2()">
+            <form class="row g-3 d-flex justify-content-center" #form="ngForm" (ngSubmit)="login()">
                 <div class="col-lg-8 col-lg-offset-8">
                     <label for="email" class="form-label">E-mail ou nom d'utilisateur</label>
                     <input type="text" class="form-control" name="email" [(ngModel)]="formData.identifier"

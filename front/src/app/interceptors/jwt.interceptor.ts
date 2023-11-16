@@ -1,12 +1,16 @@
 import { HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { CookieHelperService } from "../services/cookie-helper.service";
 
 @Injectable({ providedIn: 'root' })
 export class JwtInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(
+    private cookieHelperService:  CookieHelperService
+  ) {}
 
   public intercept(request: HttpRequest<any>, next: HttpHandler) {
-    const token = localStorage.getItem('token');
+    const token = this.cookieHelperService.getCookie("token");
+
     if (token) {
       request = request.clone({
         setHeaders: {

@@ -1,35 +1,53 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
+import { ArticleToCreate } from '../interfaces/articleToCreate.interface';
+// import { ArticlesList } from '../interfaces/articlesList.interface';
+import { Article } from '../interfaces/article.interface';
+import { CommentArticle } from '../interfaces/commentArticle.interface';
+import { ArticleDetails } from '../interfaces/articleDetails.interface';
+import { CommentaireCreate } from '../interfaces/commentaireCreate.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticlesService {
   private pathService = 'http://localhost:3001/api';
-
+  private headers = new HttpHeaders({
+    'Access-Control-Allow-Origin' : '*',
+    'Content-Type': 'application/json',
+    Accept: 'application/json'
+  });
+  
   constructor(private http: HttpClient) { }
 
-  public getArticles(): Observable<any> {
+  public getArticles(): Observable<Article[]> {
 
-    return this.http.get<any>(this.pathService + '/article/list')
+    return this.http.get<Article[]>(this.pathService + '/article/list')
     .pipe(
       tap()
       );
   }
 
-  // public login(loginRequest: LoginRequest): Observable<AuthSuccess> {
-  //   JSON.stringify(loginRequest);
-  //   return this.http.post<AuthSuccess>(`http://localhost:3001/api/auth/login`, loginRequest, { headers: this.headers});
-  // }
+  public createArticle(articleInformations: ArticleToCreate): Observable<String> {
+    JSON.stringify(articleInformations);
 
-  // public me(token: String): Observable<User> {
+    return this.http.post<String>(`http://localhost:3001/api/article/create`, articleInformations, { headers: this.headers});
+  }
 
-  //   const headersGetMe = new HttpHeaders({
-  //     "Authorization": "Token " + token
-  //   });
-  //   return this.http.get<User>(`${this.pathService}/me`, { headers: headersGetMe});
-  // }
+  public getArticleDetailled(id: number): Observable<ArticleDetails> {
 
+    return this.http.get<ArticleDetails>(this.pathService + `/article/${id}`)
+    .pipe(
+      tap()
+      );
+  }
+
+  public createComment(commentaire: CommentArticle, articleId: number): Observable<String>  {
+    var commentaireCreate: CommentaireCreate = new CommentaireCreate(commentaire, articleId);
+    JSON.stringify(commentaireCreate);
+
+    return this.http.post<String>(`http://localhost:3001/api/article/comment/create`, commentaireCreate, { headers: this.headers});
+  }
 
 }

@@ -7,7 +7,5 @@ import com.openclassrooms.mddapi.models.Article;
 
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Long> {
-
-//	public Article findByEmail(String email);
     	
 }

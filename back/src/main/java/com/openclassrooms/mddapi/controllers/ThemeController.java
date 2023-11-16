@@ -1,47 +1,62 @@
 package com.openclassrooms.mddapi.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.openclassrooms.mddapi.dto.ThemeIsSubscribedDTO;
+import com.openclassrooms.mddapi.models.User;
+import com.openclassrooms.mddapi.services.ThemeService;
+import com.openclassrooms.mddapi.services.TokenService;
 
 @CrossOrigin
 @RestController
 public class ThemeController {
 
+	@Autowired
+	private final ThemeService themeService;
 
-    //private final ThemeServices themeService;
+	@Autowired
+	private TokenService tokenService;
+	
+	public ThemeController(ThemeService themeService) {
+		this.themeService = themeService;
+	}
+	
+	@GetMapping("/theme/listTheme")
+	public ResponseEntity<List<ThemeIsSubscribedDTO>> getThemesList(@RequestHeader("Authorization") String token) {
+		List<ThemeIsSubscribedDTO> listThemeIsSubscribedDTO = themeService.getThemesList(token);
+				
+		return ResponseEntity.ok(listThemeIsSubscribedDTO);
+	}
 
-//    public ThemeController(ThemeServices themeService) {
-//        this.themeService = themeService;
-//    }
+	@GetMapping("/theme/list")
+	public ResponseEntity<List<ThemeIsSubscribedDTO>> getList(@RequestHeader("Authorization") String token) {
+		
+		return ResponseEntity.ok(themeService.getThemes(token));
+	}
 
-//    @GetMapping(
-//            value = "/themes",
-//            produces = {"application/json"}
-//    )
-//    public ResponseEntity<List<Theme>> themesGet() {
-//        return ResponseEntity.ok(themeService.getThemeList());
-//    }
+	@PostMapping(value = "/theme/subscribe")
+	public ResponseEntity<String> themesThemeIdSubscribeUserIdPost(
+			@RequestBody Long themeId,
+			@RequestHeader("Authorization") String token) {
 
-//    @PostMapping(
-//            value = "/themes/{theme_id}/subscribe/{user_id}",
-//            produces = { "application/json" }
-//    )
-//    public ResponseEntity<Void> themesThemeIdSubscribeUserIdPost(
-//            @Parameter(name = "theme_id", description = "ID of the theme to subscribe to", required = true, in = ParameterIn.PATH) @PathVariable("theme_id") Long themeId,
-//            @Parameter(name = "user_id", description = "ID of the user subscribing", required = true, in = ParameterIn.PATH) @PathVariable("user_id") Long userId
-//    ) {
-//        themeService.subscribeToTheme(themeId, userId);
-//        return ResponseEntity.ok().build();
-//    }
+		User actualUser = tokenService.validateJwtToken(token);
 
-//    @DeleteMapping(
-//            value = "/themes/{theme_id}/subscribe/{user_id}",
-//            produces = { "application/json" }
-//    )
-//    public ResponseEntity<Void> themesThemeIdSubscribeUserIdDelete(
-//            @Parameter(name = "theme_id", description = "ID of the theme to unsubscribe from", required = true, in = ParameterIn.PATH) @PathVariable("theme_id") Long themeId,
-//            @Parameter(name = "user_id", description = "ID of the user unsubscribing", required = true, in = ParameterIn.PATH) @PathVariable("user_id") Long userId
-//    ) {
-//        themeService.unsubscribeFromTheme(themeId, userId);
-//        return ResponseEntity.ok().build();
-//    }
+		themeService.subscribeToTheme(themeId, actualUser);
+		return ResponseEntity.ok("subscribe");
+	}
+
+	@PostMapping(value = "/theme/unsubscribe")
+	public ResponseEntity<String> themesThemeIdSubscribeUserIdDelete(
+			@RequestBody Long themeId,
+			@RequestHeader("Authorization") String token) {
+
+		User actualUser = tokenService.validateJwtToken(token);
+		
+		themeService.unsubscribeFromTheme(themeId, actualUser);
+		return ResponseEntity.ok("unsubscribe");
+	}
 }

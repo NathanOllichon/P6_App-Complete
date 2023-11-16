@@ -1,6 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Article } from 'src/app/interfaces/article.interface';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleDetails } from 'src/app/interfaces/articleDetails.interface';
+import { CommentArticle } from 'src/app/interfaces/commentArticle.interface';
+import { ArticlesService } from 'src/app/services/articles.service';
 
 @Component({
   selector: 'app-article-details',
@@ -8,47 +11,71 @@ import { ArticleDetails } from 'src/app/interfaces/articleDetails.interface';
   styleUrls: ['./article-details.component.scss']
 })
 export class ArticleDetailsComponent implements OnInit {
-  
+
   articleDatas: ArticleDetails =
     {
-      "titre": "titre1",
-      "date": new Date("10-12-2012"),
-      "user": "Nat",
-      "contenu": "contenu irem lopsus contenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsuscontenu irem lopsus",
-      "id" : 1,
-      "theme" : "SF"
+      "titre": "",
+      "created_at": new Date(),
+      "auteur_name": "",
+      "contenu": "",
+      "id": 0,
+      "theme_titre": "",
+      commentaires: []
     };
 
-    //TODO type that !
-    commentairesList: any[] = [
-      {
-        contenu:"test 1",
-        auteur:"Charles"
-      },
-      {
-        contenu:"Test 2",
-        auteur:"Michel"
-      }
-    ]
+  //TODO type that ! any
+  //TODO get from articleDatas !
+  // commentairesList: CommentArticle[] = []
 
-    //TODO replace by request at init. get/me
-    user : any = {
-      name: "JEANYVES"
+  comment: CommentArticle =
+    {
+      contenu: "",
+      user_name: ""
+    };
+
+  idArticle!: number;
+  stringId: string | null;
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private articlesService: ArticlesService
+  ) {
+    this.stringId = this.route.snapshot.paramMap.get('id');
+    if (this.stringId) {
+      this.idArticle = Number.parseInt(this.stringId);
     }
-
-
-  constructor() { }
+  }
 
   ngOnInit(): void {
-    //TODO service.request article get article by id
+
+    this.articlesService.getArticleDetailled(this.idArticle).subscribe({
+      next: (response: ArticleDetails) => {
+        this.articleDatas = response;
+
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error);
+        //   nothing more for now, it's an MVP product.
+      }
+    });
   }
 
-  sendComment():void{
+  sendComment(): void {
     //TODO service.putComment on article id. 
-    //refresh page ! like itcm ?
+    this.articlesService.createComment(this.comment, this.articleDatas.id).subscribe({
+      next: (response: String) => {
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error);
+        //   nothing more for now, it's an MVP product.
+      }
+    });
+
+    this.router.navigate(['articles']);
+
   }
 
-  goBack(){
+  goBack() {
     window.history.back();
   }
 

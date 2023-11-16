@@ -1,32 +1,25 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { User } from '../interfaces/user.interface';
+import { CookieHelperService } from './cookie-helper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
 
-  public isLogged = false;
-  public user: User | undefined;
+  constructor(
+    private cookieHelperService: CookieHelperService
+  ){}
 
-  private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
+  public isLogged: boolean = this.cookieHelperService.getCookie("token").length > 0; //TODO or undefined ?
 
-  public $isLogged(): Observable<boolean> {
-    return this.isLoggedSubject.asObservable();
-  }
+  public isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
 
-  public logIn(user: User): void {
-    this.user = user;
-    this.isLogged = true;
+  public islogged(){
+    var tokenCookieValue: string = this.cookieHelperService.getCookie("token");
+    this.isLogged = tokenCookieValue.length > 0 ? true : false ; //he have a token store in cookies ?
     this.next();
-  }
-
-  public logOut(): void {
-    localStorage.removeItem('token');
-    this.user = undefined;
-    this.isLogged = false;
-    this.next();
+    return this.isLogged;
   }
 
   private next(): void {

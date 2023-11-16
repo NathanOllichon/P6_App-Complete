@@ -1,16 +1,26 @@
 <app-menu-connected></app-menu-connected>
 
 <div class="grid-container">
-    <ng-container *ngFor="let theme of themesDatas">
+    <ng-container *ngFor="let theme of themes">
         <div class="theme">
             <label class="titre">{{theme.titre}}</label>
             <span class="contenu">{{theme.description}}</span>
 
+            <!-- TODO test boolean -->
+            <!-- <span class="test">{{theme.isUserSubscribed}}</span> -->
+
             <div class="subscribeThemeDiv">
 
-                <button mat-flat-button class="subscribeThemeBtn" color="primary" (click)="subscribeTheme(theme.id);">
-                    S'abonner
-                </button>
+                    <button *ngIf="theme.isSubscribed;" mat-flat-button class="unsubscribeThemeBtn" color="primary"
+                        (click)="unSubscribeTheme(theme.id);">
+                        Se désabonner
+                    </button>
+
+                    <button *ngIf="!theme.isSubscribed;" mat-flat-button class="subscribeThemeBtn" style="min-weight:5vw" color="primary"
+                        (click)="subscribeTheme(theme.id);">
+                        S'abonner
+                    </button>
+
             </div>
 
         </div>

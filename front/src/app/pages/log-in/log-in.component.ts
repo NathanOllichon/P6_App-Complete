@@ -19,7 +19,6 @@ export class LogInComponent implements OnInit {
   public onError = false;
   public testErrorMessage = "";
 
-  //TODO no any, model datas !
   formData: LoginRequest ={
     identifier: '',
     password: ''
@@ -31,7 +30,7 @@ export class LogInComponent implements OnInit {
     private sessionService: SessionService
     ) { }
 
-  ngOnInit(): void {
+  ngOnInit(){
   }
 
   public form = this.formBuilder.group({
@@ -39,12 +38,11 @@ export class LogInComponent implements OnInit {
     password: ['', [Validators.required, Validators.min(3)]]
   });
 
-  public submit2(): void {
+  public login(){
     this.authService.login(this.formData).subscribe(
       (response: AuthSuccess) => {
         localStorage.setItem('token', response.token);
         this.authService.me(response.token).subscribe((user: User) => {
-          this.sessionService.logIn(user);
           this.router.navigate(['/articles'])
         });
         this.router.navigate(['/logIn'])

@@ -1,7 +1,8 @@
 package com.openclassrooms.mddapi.models;
 
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -34,7 +35,7 @@ public class Article {
     @Column(name = "contenu")
     private String contenu;
 
-    @CreatedDate
+    @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private Instant created_at;
 

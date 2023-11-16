@@ -1,5 +1,5 @@
 export interface ArticleToCreate {
-    themeID: string,
-    titre: string,
+    idTheme: number,
+    title: string,
     contenu: string
 }

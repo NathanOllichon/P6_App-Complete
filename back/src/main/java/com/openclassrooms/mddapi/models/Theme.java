@@ -4,9 +4,10 @@ import lombok.*;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
@@ -18,13 +19,16 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+//@IdClass(Theme.class)
 public class Theme {
 
-    @Id
-    private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	@Id
+	private long id;
 
     @Column(name = "titre")
-    private String title;
+    private String titre;
 
     @Column(name = "description")
     private String description;
@@ -35,12 +39,11 @@ public class Theme {
             fetch = FetchType.LAZY)
     private List<Subscription> subscriptionList;
 
-    
+//    @EmbeddedId
     @OneToMany(
             mappedBy = "id", //TODO for mapped spring need that !
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    @EmbeddedId
     private List<Article> articleEntities;
 }

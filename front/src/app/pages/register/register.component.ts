@@ -18,7 +18,6 @@ export class RegisterComponent implements OnInit {
   public onError = false;
   public testErrorMessage = "";
   
-  //TODO no any, model datas !
   formData: RegisterRequest ={
     email: '',
     username: '',
@@ -51,40 +50,16 @@ export class RegisterComponent implements OnInit {
   userNameControl = new FormControl([Validators.required]);
 
   public submit(): void {
-    
-    // this.authService.register(registerRequest).subscribe(
-    //   (response: AuthSuccess) => {
-    //     localStorage.setItem('token', response.token);
-    //     this.authService.me().subscribe((user: User) => {
-    //       this.sessionService.logIn(user);
-    //       this.router.navigate(['/rentals'])
-    //     });
-    //   },
-    //   error => {
-    //     this.onError = true;
-    //     console.log("error:" + error);
-    //     console.log(error);
-    //   }
-    // );
 
     this.authService.register(this.formData).subscribe({
       next: (response: AuthSuccess) => {
-        localStorage.setItem('token', response.token);
-        this.authService.me(response.token).subscribe((user: User) => {
-          this.sessionService.logIn(user);
           this.router.navigate(['/rentals'])
-        });
       },
       error: (err: HttpErrorResponse)=> {
         this.onError = true;
-        console.log("error:" + err);
-        console.log(err);
       }
     });
 
   }
-  // alert('register OK');
-  //TODO
-  //or error 500, 401, 404, custom, ...
 
 }
